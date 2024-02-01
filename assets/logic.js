@@ -1,4 +1,5 @@
 console.log("hello world")
+<<<<<<< HEAD
 
 
 
@@ -38,3 +39,6 @@ const settings = {
 $.ajax(settings).done(function (response) {
 	console.log(response);
 });
+=======
+const apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https://www.themoviedb.org/settings/api
+>>>>>>> d30cafc532c6cff14fdd09454cf6436028f1dd6a
