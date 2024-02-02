@@ -1,0 +1,115 @@
+
+.form {
+    margin-right: 20px;
+    background-color: #e0e0e0; /* Add background color to the form */
+    padding: 20px;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+.form h2 {
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+select, input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.submitButton {
+    background-color: #4CAF50; /* Green color for the button */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.movie {
+    width: calc(33.33% - 20px); /* Three items in a row with margin */
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-right: 20px;
+    box-sizing: border-box;
+}
+
+.movie img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.movie-info {
+    background-color: #f0f0f0; /* Background color for movie info */
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+}
+
+.myMoviesButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+/* Add styles for the example images */
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.side-by-side {
+    display: flex;
+    justify-content: space-between;
+}
+
+.vertical-form {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.vertical-form h2 {
+    color: #333;
+}
+
+.vertical-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.vertical-form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.vertical-form .submitButton {
+    background-color: #3498db; /* Blue color for the button */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.vertical-form .submitButton:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
