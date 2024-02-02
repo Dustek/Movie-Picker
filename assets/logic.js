@@ -119,6 +119,17 @@ function displaySavedMovies() {
             movieElement.append('<h3>' + movie.title + '</h3>');
             movieElement.append('<p>Genre: ' + movie.genre + '</p>');
 
+            var deleteButton = $('<button class="deleteButton">Delete</button>');
+            deleteButton.click(function () {
+                // Remove the movie from the array
+                movies.splice(index, 1);
+                // Update local storage with the modified array
+                localStorage.setItem('savedMovies', JSON.stringify(movies));
+                // Update the displayed movies
+                displaySavedMovies();
+            });
+            movieElement.append(deleteButton);
+
             myMoviesContainer.append(movieElement);
         });
     } else {
