@@ -4,8 +4,6 @@ const apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https:
 
 STREAMING_API
 // Streaming availability API 
-
-
 var movieID = "movie%2F597" //This is the movie ID - in this case, Titanic
 
 const settings = {
@@ -72,4 +70,14 @@ $(document).ready(function() {
     //         fetchMovies(criteria);
     //     });
 
+});
+
+
+
+$("#backbutton").click(function(){
+	window.location.href = "index.html";
+});
+
+$("#mymoviesbutton").click(function(){
+	window.location.href = "my_movies.html";
 });
