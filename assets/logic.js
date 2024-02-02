@@ -38,3 +38,11 @@ const settings = {
 $.ajax(settings).done(function (response) {
 	console.log(response);
 });
+
+$("#backbutton").click(function(){
+	window.location.href = "index.html";
+});
+
+$("#mymoviesbutton").click(function(){
+	window.location.href = "my_movies.html";
+});
