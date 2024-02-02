@@ -1,4 +1,3 @@
-console.log("hello world")
 const apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https://www.themoviedb.org/settings/api
 
 // Streaming availability API 
@@ -71,67 +70,74 @@ $(document).ready(function() {
 });
 
 
-
-$("#backbutton").click(function(){
-	window.location.href = "index.html";
-});
-
-$("#mymoviesbutton").click(function(){
-	window.location.href = "my_movies.html";
-});
-
-
-
-        // Functionality for save buttons
-
+// Functionality for save buttons
 $('.saveButton').click(function () {
+    console.log("click");
     var movieElement = $(this).closest('.movie');
-    // Extracts movie information from the movie element
     var movieTitle = movieElement.find('h3').text();
     var genre = movieElement.find('p').text();
     var imageUrl = movieElement.find('img').attr('src');
-    // Creates a movie object
+
     var movie = {
         title: movieTitle,
         genre: genre,
         imageUrl: imageUrl
-        // Add other movie details as needed
     };
 
-    // Convert the movie object to a JSON string
-    var movieData = JSON.stringify(movie);
+    // Retrieve existing saved movies from local storage
+    var savedMovies = localStorage.getItem('savedMovies');
 
-    // Save the movie data to local storage
-    localStorage.setItem('savedMovie', movieData);
+    // Check if there are already saved movies
+    if (savedMovies) {
+        // Parse the JSON data
+        var moviesArray = JSON.parse(savedMovies);
+
+        // Add the new movie to the array
+        moviesArray.push(movie);
+
+        // Convert the updated array back to JSON and save it
+        localStorage.setItem('savedMovies', JSON.stringify(moviesArray));
+    } else {
+        // If no saved movies exist, create a new array with the current movie
+        localStorage.setItem('savedMovies', JSON.stringify([movie]));
+    }
 });
 
+// Functionality for displaying saved movies
+function displaySavedMovies() {
+    console.log("movies displayed");
+    var myMoviesContainer = $('#myMoviesContainer');
+    myMoviesContainer.empty();
+    var savedMovies = localStorage.getItem('savedMovies');
 
+    if (savedMovies) {
+        var movies = JSON.parse(savedMovies);
 
-        // Functionality for displaying saved movies
+        $.each(movies, function (index, movie) {
+            var movieElement = $('<div class="savedMovie">');
+            movieElement.append('<img src="' + movie.imageUrl + '" alt="' + movie.title + '">');
+            movieElement.append('<h3>' + movie.title + '</h3>');
+            movieElement.append('<p>Genre: ' + movie.genre + '</p>');
 
-        function displaySavedMovies() {
-            var myMoviesContainer = $('#myMoviesContainer');
-            myMoviesContainer.empty();
-            var savedMovies = localStorage.getItem('savedMovies');
-    
-            if (savedMovies) {
-                var movies = JSON.parse(savedMovies);
-    
-                $.each(movies, function (index, movie) {
-                    // Create HTML elements for each movie
-                    var movieElement = $('<div class="savedMovie">');
-                    movieElement.append('<img src="' + movie.imageUrl + '" alt="' + movie.title + '">');
-                    movieElement.append('<h3>' + movie.title + '</h3>');
-                    movieElement.append('<p>Genre: ' + movie.genre + '</p>');
-    
-                    // Append the movie element to the myMoviesContainer
-                    myMoviesContainer.append(movieElement);
-                });
-            } else {
-                // Display a message if there are no saved movies
-                myMoviesContainer.html('<p>No movies saved yet.</p>');
-            }
-        }
-    
-        // Call the displaySavedMovies function when the page loads
+            myMoviesContainer.append(movieElement);
+        });
+    } else {
+        myMoviesContainer.html('<p>No movies saved yet.</p>');
+    }
+}
+
+    // Event listener for when the my_movies.html page is loaded
+    $(document).on('DOMContentLoaded', function () {
+        console.log("hello world");
         displaySavedMovies();
+    });
+
+// Event listener for the back button
+$("#backbutton").click(function () {
+    window.location.href = "index.html";
+});
+
+// Event listener for navigating to the my_movies.html page
+$("#mymoviesbutton").click(function () {
+    window.location.href = "my_movies.html";
+});
