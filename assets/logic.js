@@ -56,9 +56,11 @@ $(document).ready(function() {
 
     }
 
+
+
 // Movie search criteria
 
-const criteria = {
+var criteria = {
     sort_by: "popularity.desc",  // Sorting by popularity in descending order
     release_date_gte: "2000-01-01",  // Movies released on or after January 1, 2000
     release_date_lte: "2022-12-31", // Movies released on or before December 31, 2022
@@ -68,10 +70,6 @@ const criteria = {
     with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
     with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
 };
-
-};
-
-
 
     // to make displayMovies function 
 
