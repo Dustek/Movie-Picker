@@ -1,26 +1,29 @@
 const apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https://www.themoviedb.org/settings/api
 
-// Streaming availability API 
-var movieID = "movie%2F597" //This is the movie ID - in this case, Titanic
+// // Streaming availability API 
+// var movieID = "movie%2F597" //This is the movie ID - in this case, Titanic
 
-const settings = {
-	async: true,
-	crossDomain: true,
-	url: 'https://streaming-availability.p.rapidapi.com/get?output_language=en&tmdb_id=' + movieID, // insert movie ID from TMDB API here to change what movie data gets returned
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '33f6a33b50msh44eaaaf10ff1208p1390ecjsn752ee4c6b130',
-		'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-	}
-};
+// const settings = {
+// 	async: true,
+// 	crossDomain: true,
+// 	url: 'https://streaming-availability.p.rapidapi.com/get?output_language=en&tmdb_id=' + movieID, // insert movie ID from TMDB API here to change what movie data gets returned
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '33f6a33b50msh44eaaaf10ff1208p1390ecjsn752ee4c6b130',
+// 		'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+// 	}
+// };
 
-$.ajax(settings).done(function (response) {
-	console.log(response);
-    console.log("The movie titanic can be streamed on:")
-    console.log(response.result.streamingInfo.gb[0].service)
-    console.log(response.result.streamingInfo.gb[1].service)
-    console.log(response.result.streamingInfo.gb[2].service)
-})
+
+// $.ajax(settings).done(function (response) {
+// 	console.log(response);
+//     console.log("The movie titanic can be streamed on:")
+//     console.log(response.result.streamingInfo.gb[0].service)
+//     console.log(response.result.streamingInfo.gb[1].service)
+//     console.log(response.result.streamingInfo.gb[2].service)
+// })
+
+
 $(document).ready(function() {
 
     // Element references
@@ -40,6 +43,7 @@ $(document).ready(function() {
         fetch(fullUrl)
             .then(response => response.json())
             .then((data) => {
+                console.log(data.results);
 
                 displayMovies(data.results)
             })
@@ -49,9 +53,26 @@ $(document).ready(function() {
     fetchMovies("Fast and Furios")
 
     function displayMovies(moviedata) {
-        console.log(moviedata)
 
     }
+
+// Movie search criteria
+
+const criteria = {
+    sort_by: "popularity.desc",  // Sorting by popularity in descending order
+    release_date_gte: "2000-01-01",  // Movies released on or after January 1, 2000
+    release_date_lte: "2022-12-31", // Movies released on or before December 31, 2022
+    with_genres: "28",  // Genre ID for Action (you can replace this with the desired genre)
+    release_country: "US", // Specify the country code (e.g., "US" for United States)
+    with_runtime_gte: 60,  // Movies with a runtime greater than or equal to 60 minutes (1 hour)
+    with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
+    with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
+};
+
+};
+
+
+
     // to make displayMovies function 
 
     //     // Handle form submission
