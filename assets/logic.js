@@ -1,27 +1,30 @@
 const apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https://www.themoviedb.org/settings/api
 
 // Streaming availability API 
-var movieID = "128" //This is the movie ID - insert ID from TMDB API here
+$(document).ready(function () {
+    $('.streamButton').click(function () {
+        $('#streamingOptions').empty(); // Clears current options displayed
+        var movieID = $(this).closest('.movie').data('movieid'); // Finds the ID from the movieid data attribute
 
-const settings = {
-	async: true,
-	crossDomain: true,
-	url: 'https://streaming-availability.p.rapidapi.com/get?output_language=en&tmdb_id=movie%2F' + movieID, // insert movie ID from TMDB API here to change what movie data gets returned
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '33f6a33b50msh44eaaaf10ff1208p1390ecjsn752ee4c6b130',
-		'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-	}
-};
-
-$.ajax(settings).done(function (response) {
-	console.log(response);
-    console.log("The movie " + response.result.title + " can be streamed on:")
-    response.result.streamingInfo.gb.forEach(function (option, index) {
-        console.log("Option " + (index + 1) + ": " + option.service);
-})
-})
-
+        // Make the API call with the retrieved movie ID
+        const url = 'https://streaming-availability.p.rapidapi.com/get?output_language=en&tmdb_id=movie%2F' + movieID;
+        const headers = {
+        'X-RapidAPI-Key': '33f6a33b50msh44eaaaf10ff1208p1390ecjsn752ee4c6b130',
+        'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+        };
+        fetch(url, { method: 'GET', headers: headers })
+            .then(response => response.json())  
+            .then(response => {
+                // for each item in streaming options array, adds an element
+                response.result.streamingInfo.gb.forEach(function (option, index) {
+                    var title = $("<h3>").text(response.result.title);
+                    var optionElement = $("<h4>").text("Option " + (index + 1) + ": " + option.service);
+                    $('#streamingOptions').append(title, optionElement);
+                });
+            })
+            .catch(error => console.error('Error fetching streaming info:', error));
+    });
+});
 $(document).ready(function() {
 
     var criteria = {
@@ -70,7 +73,6 @@ $(document).ready(function() {
 
 // Functionality for save buttons
 $('.saveButton').click(function () {
-    console.log("click");
     var movieElement = $(this).closest('.movie');
     var movieTitle = movieElement.find('h3').text();
     var genre = movieElement.find('p').text();
@@ -81,6 +83,9 @@ $('.saveButton').click(function () {
         genre: genre,
         imageUrl: imageUrl
     };
+
+
+
 
     // Retrieve existing saved movies from local storage
     var savedMovies = localStorage.getItem('savedMovies');
