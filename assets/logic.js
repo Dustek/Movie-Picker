@@ -27,9 +27,6 @@ $(document).ready(function() {
 });
 
 
-// https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_keywords=cowboy
-
-// https://api.themoviedb.org/3/discover/movie?api_key=d1bd943fc99631774931a9f3f8646804&sort_by=popularity.desc&with_keywords=cowboy
 
 
 $(document).ready(function() {
@@ -44,7 +41,7 @@ $(document).ready(function() {
         // with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
         // with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
         // with_keywords: "cowboy"
-        with_original_language: "fr"
+        with_original_language: "en"
     };
 
     // Element references
@@ -81,22 +78,74 @@ $(document).ready(function() {
 
 });
 
-function displayMovies(moviedata) {
-    gallery.empty(); // Clear previous movie items
-
-    for (let i = 0; i < 6; i++) {
-        const movie = movies[i];
-        const movieItem = $(`<div class="movie" data-movieid="${movie.id}"></div>`);
-        // ... (Add movie poster, title, overview, language, and Save button) ...
-        movieItem.append(`<h3>${movie.title}</h3>`);
-        movieItem.append(`<p>Original Language: ${movie.original_language}</p>`);
-        movieItem.append(`<p>Overview: ${movie.overview}</p>`);
-        //movieItem.append(`<button class="saveButton">Save</button>`);
-        gallery.append(movieItem);
-    }
+function displayMovies(movies) {
+    movies.forEach((movie, index) => {
+        const movieCard = $(`#movie${index + 1}`);
+        const movieInfo = movieCard.find(".movie-info");
+        
+        movieInfo.find("h3").text(movie.title);
+        movieInfo.find("p").text(`Genre: ${getGenre(movie.genre_ids[0])}`);
+        movieInfo.find("p").after(`<p>${movie.overview}</p>`);
+        
+        movieCard.attr("data-movieid", movie.id);
+        
+        if (movie.backdrop_path) {
+            const imageUrl = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
+            movieCard.find("img").attr("src", imageUrl);
+        } else {
+            movieCard.find("img").hide();
+        }
+    });
 }
 
 
+
+function getGenre(genreId) {
+    // Function to retrieve genre name based on genre ID
+    // You can replace this function with a lookup table or API call to fetch genre names
+    switch (genreId) {
+        case 28:
+            return "Action";
+        case 12:
+            return "Adventure";
+        case 16:
+            return "Animation";
+        case 35:
+            return "Comedy";
+        case 80:
+            return "Crime";
+        case 99:
+            return "Documentary";
+        case 18:
+            return "Drama";
+        case 10751:
+            return "Family";
+        case 14:
+            return "Fantasy";
+        case 36:
+            return "History";
+        case 27:
+            return "Horror";
+        case 10402:
+            return "Music";
+        case 9648:
+            return "Mystery";
+        case 10749:
+            return "Romance";
+        case 878:
+            return "Science Fiction";
+        case 10770:
+            return "TV Movie";
+        case 53:
+            return "Thriller";
+        case 10752:
+            return "War";
+        case 37:
+            return "Western";
+        default:
+            return "Unknown";
+    }
+}
 
 
 // Functionality for save buttons

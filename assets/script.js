@@ -31,19 +31,6 @@ $(document).ready(function() {
         console.log(moviedata)
 
     }
-    // to make displayMovies function 
 
-    //     // Handle form submission
-    //     searchForm.submit(function(event) {
-    //         event.preventDefault(); // Prevent default form submission
-
-    //         const criteria = {
-    //             genre: $(this).find("#genre").val(),
-    //             primary_release_year: $(this).find("#year").val(),
-    //             //Gather other criteria from form fields
-    //         };
-
-    //         fetchMovies(criteria);
-    //     });
 
 });

@@ -20,9 +20,8 @@
     <div class="container">
         <div class="side-by-side">
             <form id="movieForm" class="form" style="width: 40%;">
-                <!-- Form elements go here -->
-                <!-- <label for="genre">Select Genre:</label>
-                <select id="genre" name="genre">
+                <label for="genre">Select Genre:</label>
+              <select id="genre" name="genre">
                     <option value="action">Action</option>
                     <option value="comedy">Comedy</option>
                     <option value="drama">Drama</option>
@@ -40,7 +39,7 @@
                     <option value="actor1">Actor 1</option>
                     <option value="actor2">Actor 2</option>
                     <option value="actor3">Actor 3</option>
-                </select> -->
+                </select>
 
                 <label for="country">Select Country Language:</label>
                 <select id="original-language" name="country">
@@ -50,10 +49,10 @@
                     <option value="ko">ko</option>
                     <option value="es">Spanish</option>
                     <option value="de">German</option>
-                    <!-- Add more countries as needed -->
+                    Add more countries as needed
                 </select>
 
-                <!-- <label for="length">Select Movie Length:</label>
+                <label for="length">Select Movie Length:</label>
                 <select id="length" name="length">
                     <option value="short">Short (less than 1 hour)</option>
                     <option value="medium">Medium (1-2 hours)</option>
@@ -79,7 +78,7 @@
             <!-- Movie gallery goes here -->
             <div id="gallery" class="gallery" style="width: 60%;">
                 <!-- Movie 1 -->
-                <div class="movie" data-movieid="123">
+                <div class="movie" id="movie1" data-movieid="123">
                     <img src="action.jpg" alt="Action Movie">
                     <div class="movie-info">
                         <h3>Movie Title 1</h3>
@@ -90,7 +89,7 @@
                 </div>
 
                 <!-- Movie 2 -->
-                <div class="movie" data-movieid="123">
+                <div class="movie" id="movie2" data-movieid="123">
                     <img src="movie2.jpg" alt="Movie 2">
                     <div class="movie-info">
                         <h3>Movie Title 2</h3>
@@ -101,7 +100,7 @@
                 </div>
 
                 <!-- Movie 3 -->
-                <div class="movie" data-movieid="123">
+                <div class="movie" id="movie3" data-movieid="123">
                     <img src="movie3.jpg" alt="Movie 3">
                     <div class="movie-info">
                         <h3>Movie Title 3</h3>
@@ -111,17 +110,17 @@
                     </div>
                 </div>
                 <!-- Movie 4 -->
-                <div class="movie" data-movieid="123">
+                <div class="movie" id="movie4" data-movieid="123">
                     <img src="movie4.jpg" alt="Movie 4">
                     <div class="movie-info">
                         <h3>Movie Title 4</h3>
-                        <p>Genre: Romance</p>
+                        <p>movie info</p>
                         <button class="saveButton">Save</button>
                         <button class="streamButton">Streaming Options</button>
                     </div>
                 </div>
                 <!-- Movie 5 -->
-                <div class="movie" data-movieid="123">
+                <div class="movie" id="movie5" data-movieid="123">
                     <img src="movie5.jpg" alt="Movie 5">
                     <div class="movie-info">
                         <h3>Movie Title 5</h3>
@@ -132,7 +131,7 @@
                 </div>
 
                 <!-- Movie 6 -->
-                <div class="movie" data-movieid="123">
+                <div class="movie" id="movie6" data-movieid="123">
                     <img src="movie6.jpg" alt="Movie 6">
                     <div class="movie-info">
                         <h3>Movie Title 6</h3>
@@ -141,7 +140,7 @@
                         <button class="streamButton">Streaming Options</button>
                     </div>
                 </div>
-
+<button class="submitButton">Show Movies</button>
                 <button id="mymoviesbutton" type="button" class="btn btn-primary">My movies</button>
 
 
