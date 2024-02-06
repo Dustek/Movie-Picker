@@ -19,15 +19,20 @@ $(document).ready(function() {
             .then(response => response.json())
             .then(response => {
                 const addedOptions = new Set(); // To store unique options
-                response.result.streamingInfo.gb.forEach(function(option, index) {
-                    const optionKey = option.service.toLowerCase(); // Consider option case-insensitive
-                    if (!addedOptions.has(optionKey)) { // Check if option is already added
-                        var title = $("<h3>").text(response.result.title);
-                        var optionElement = $("<h4>").text("Option " + (index + 1) + ": " + option.service);
-                        $('#streamingOptions').append(title, optionElement);
-                        addedOptions.add(optionKey); // Add option to the set
-                    }
-                });
+                if (!response.result.streamingInfo.gb || response.result.streamingInfo.gb.length === 0) {
+                    console.log("no options");
+                    $('#streamingOptions').text('Sorry, no streaming options available :(');
+                } else {
+                    response.result.streamingInfo.gb.forEach(function(option, index) {
+                        const optionKey = option.service.toLowerCase(); // Consider option case-insensitive
+                        if (!addedOptions.has(optionKey)) { // Check if option is already added
+                            var title = $("<h3>").text(response.result.title);
+                            var optionElement = $("<h4>").text("Option " + (index + 1) + ": " + option.service);
+                            $('#streamingOptions').append(title, optionElement);
+                            addedOptions.add(optionKey); // Add option to the set
+                        }
+                    });
+                }
             })
             .catch(error => console.error('Error fetching streaming info:', error));
     });
