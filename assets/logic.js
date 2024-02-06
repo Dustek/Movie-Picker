@@ -25,17 +25,26 @@ $(document).ready(function () {
             .catch(error => console.error('Error fetching streaming info:', error));
     });
 });
+
+
+// https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_keywords=cowboy
+
+// https://api.themoviedb.org/3/discover/movie?api_key=d1bd943fc99631774931a9f3f8646804&sort_by=popularity.desc&with_keywords=cowboy
+
+
 $(document).ready(function() {
 
     var criteria = {
         sort_by: "popularity.desc",  // Sorting by popularity in descending order
-        "release_date.gte": "1999-12-31",
-        "release_date.lte": "2001-12-31",
-        // with_genres: "18",  // Genre ID for Action (you can replace this with the desired genre)
+        // "release_date.gte": "1999-12-31",
+        // "release_date.lte": "2001-12-31",
+        with_genres: "18",  // Genre ID for Action (you can replace this with the desired genre)
         // release_country: "US", // Specify the country code (e.g., "US" for United States)
         // with_runtime_gte: 60,  // Movies with a runtime greater than or equal to 60 minutes (1 hour)
         // with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
         // with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
+        // with_keywords: "cowboy"
+        with_original_language: "fr"
     };
 
     // Element references
@@ -155,3 +164,18 @@ $("#backbutton").click(function () {
 $("#mymoviesbutton").click(function () {
     window.location.href = "my_movies.html";
 });
+
+
+
+const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer d1bd943fc99631774931a9f3f8646804'
+    }
+  };
+  
+  fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
