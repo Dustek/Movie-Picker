@@ -1,22 +1,22 @@
 const apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https://www.themoviedb.org/settings/api
 
 // Streaming availability API 
-$(document).ready(function () {
-    $('.streamButton').click(function () {
+$(document).ready(function() {
+    $('.streamButton').click(function() {
         $('#streamingOptions').empty(); // Clears current options displayed
         var movieID = $(this).closest('.movie').data('movieid'); // Finds the ID from the movieid data attribute
 
         // Make the API call with the retrieved movie ID
         const url = 'https://streaming-availability.p.rapidapi.com/get?output_language=en&tmdb_id=movie%2F' + movieID;
         const headers = {
-        'X-RapidAPI-Key': '33f6a33b50msh44eaaaf10ff1208p1390ecjsn752ee4c6b130',
-        'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+            'X-RapidAPI-Key': '33f6a33b50msh44eaaaf10ff1208p1390ecjsn752ee4c6b130',
+            'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
         };
         fetch(url, { method: 'GET', headers: headers })
-            .then(response => response.json())  
+            .then(response => response.json())
             .then(response => {
                 // for each item in streaming options array, adds an element
-                response.result.streamingInfo.gb.forEach(function (option, index) {
+                response.result.streamingInfo.gb.forEach(function(option, index) {
                     var title = $("<h3>").text(response.result.title);
                     var optionElement = $("<h4>").text("Option " + (index + 1) + ": " + option.service);
                     $('#streamingOptions').append(title, optionElement);
@@ -27,37 +27,42 @@ $(document).ready(function () {
 });
 $(document).ready(function() {
 
-    var criteria = {
-        sort_by: "popularity.desc",  // Sorting by popularity in descending order
-        "release_date.gte": "1999-12-31",
-        "release_date.lte": "2001-12-31",
-        // with_genres: "18",  // Genre ID for Action (you can replace this with the desired genre)
-        // release_country: "US", // Specify the country code (e.g., "US" for United States)
-        // with_runtime_gte: 60,  // Movies with a runtime greater than or equal to 60 minutes (1 hour)
-        // with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
-        // with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
-    };
+    // var criteria = {
+    //     sort_by: "popularity.desc", // Sorting by popularity in descending order
+    //     "release_date.gte": "1999-12-31",
+    //     "release_date.lte": "2001-12-31",
+    //     // with_genres: "18",  // Genre ID for Action (you can replace this with the desired genre)
+    //     // release_country: "US", // Specify the country code (e.g., "US" for United States)
+    //     // with_runtime_gte: 60,  // Movies with a runtime greater than or equal to 60 minutes (1 hour)
+    //     // with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
+    //     // with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
+    // };
 
     // Element references
     const searchForm = $("#movieForm");
-    const movieList = $("#movie-list");
+    // const movieList = $("#movie-list");
+    const gallery = $("#gallery");
+    searchForm.submit(function(event) {
+        event.preventDefault();
+
+        const originalLanguage = $(this).find("#original_language").val();
+
+        fetchMovies({ original_language: originalLanguage });
+    });
 
     function fetchMovies(criteria) {
         const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`;
-
         // Build the query string with criteria
         const queryString = Object.entries(criteria)
             .map(([key, value]) => `${key}=${value}`)
             .join("&");
-
         const fullUrl = `${url}&${queryString}`;
-        console.log(fullUrl)
+        //console.log(fullUrl)
 
         fetch(fullUrl)
             .then(response => response.json())
             .then((data) => {
                 console.log(data.results);
-
                 displayMovies(data.results)
             })
 
@@ -65,14 +70,28 @@ $(document).ready(function() {
     }
     fetchMovies(criteria)
 
-    function displayMovies(moviedata) {
-    }
-
 });
+
+function displayMovies(moviedata) {
+    gallery.empty(); // Clear previous movie items
+
+    for (let i = 0; i < 6; i++) {
+        const movie = movies[i];
+        const movieItem = $(`<div class="movie" data-movieid="${movie.id}"></div>`);
+        // ... (Add movie poster, title, overview, language, and Save button) ...
+        movieItem.append(`<h3>${movie.title}</h3>`);
+        movieItem.append(`<p>Original Language: ${movie.original_language}</p>`);
+        movieItem.append(`<p>Overview: ${movie.overview}</p>`);
+        //movieItem.append(`<button class="saveButton">Save</button>`);
+        gallery.append(movieItem);
+    }
+}
+
+
 
 
 // Functionality for save buttons
-$('.saveButton').click(function () {
+$('.saveButton').click(function() {
     var movieElement = $(this).closest('.movie');
     var movieTitle = movieElement.find('h3').text();
     var genre = movieElement.find('p').text();
@@ -116,14 +135,14 @@ function displaySavedMovies() {
     if (savedMovies) {
         var movies = JSON.parse(savedMovies);
 
-        $.each(movies, function (index, movie) {
+        $.each(movies, function(index, movie) {
             var movieElement = $('<div class="savedMovie">');
             movieElement.append('<img src="' + movie.imageUrl + '" alt="' + movie.title + '">');
             movieElement.append('<h3>' + movie.title + '</h3>');
             movieElement.append('<p>Genre: ' + movie.genre + '</p>');
 
             var deleteButton = $('<button class="deleteButton">Delete</button>');
-            deleteButton.click(function () {
+            deleteButton.click(function() {
                 // Remove the movie from the array
                 movies.splice(index, 1);
                 // Update local storage with the modified array
@@ -140,18 +159,18 @@ function displaySavedMovies() {
     }
 }
 
-    // Event listener for when the my_movies.html page is loaded
-    $(document).on('DOMContentLoaded', function () {
-        console.log("hello world");
-        displaySavedMovies();
-    });
+// Event listener for when the my_movies.html page is loaded
+$(document).on('DOMContentLoaded', function() {
+    console.log("hello world");
+    displaySavedMovies();
+});
 
 // Event listener for the back button
-$("#backbutton").click(function () {
+$("#backbutton").click(function() {
     window.location.href = "index.html";
 });
 
 // Event listener for navigating to the my_movies.html page
-$("#mymoviesbutton").click(function () {
+$("#mymoviesbutton").click(function() {
     window.location.href = "my_movies.html";
 });
