@@ -56,17 +56,18 @@ $(document).ready(function() {
         with_original_language: "en"
     };
 
-    // Element references
-    const searchForm = $("#movieForm");
-    // const movieList = $("#movie-list");
-    const gallery = $("#gallery");
-    searchForm.submit(function(event) {
-        event.preventDefault();
+    $(document).ready(function() {
 
-        const originalLanguage = $(this).find("#original_language").val();
-
-        fetchMovies({ original_language: originalLanguage });
-    });
+        const searchForm = $("#movieForm");
+        searchForm.submit(function(event) {
+            event.preventDefault();
+            const criteria = {
+                sort_by: "popularity.desc",
+                with_genres: "18",
+                with_original_language: "fr"
+            };
+            fetchMovies(criteria); // Pass criteria object to fetchMovies
+        });
 
     function fetchMovies(criteria) {
         const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`;
@@ -86,8 +87,6 @@ $(document).ready(function() {
 
         .catch(error => console.error("Error fetching movies:", error));
     }
-    fetchMovies(criteria)
-
 });
 
 function displayMovies(movies) {
@@ -258,4 +257,4 @@ const options = {
   fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
     .then(response => response.json())
     .then(response => console.log(response))
-    .catch(err => console.error(err));
+    .catch(err => console.error(err)); } )
