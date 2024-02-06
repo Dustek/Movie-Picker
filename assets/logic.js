@@ -61,10 +61,15 @@ $(document).ready(function() {
         const searchForm = $("#movieForm");
         searchForm.submit(function(event) {
             event.preventDefault();
+
+            // finding criteria based on input in form
+            const originalLanguage = $(this).find("#original-language").val();
+
+            // constructed criteria
             const criteria = {
                 sort_by: "popularity.desc",
                 with_genres: "18",
-                with_original_language: "fr"
+                with_original_language: originalLanguage
             };
             fetchMovies(criteria); // Pass criteria object to fetchMovies
         });
