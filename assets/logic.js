@@ -263,7 +263,7 @@ $(document).ready(function() {
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
-})const apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https://www.themoviedb.org/settings/api
+})
 
 // Streaming availability API 
 // Streaming availability API 
