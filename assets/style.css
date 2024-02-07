@@ -267,3 +267,12 @@ select, input {
     cursor: pointer;
 } 
    
+
+#streamingContainer {
+    position: fixed;
+    top: 300px; /* Adjust the distance from the top as needed */
+    right: 300px; /* Adjust the distance from the right as needed */
+    width: 300px; /* Adjust the width as needed */
+    padding: 20px;
+    border: 1px solid #ccc;
+}
