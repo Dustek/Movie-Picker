@@ -1,45 +1,5 @@
 var apiKey = "d1bd943fc99631774931a9f3f8646804"; //my TMDB API key site https://www.themoviedb.org/settings/api
 
-// Streaming availability API 
-// Streaming availability API 
-// Streaming availability API 
-$(document).ready(function() {
-    $('.streamButton').click(function() {
-        $('#streamingOptions').empty(); // Clears current options displayed
-        var movieID = $(this).closest('.movie').data('movieid'); // Finds the ID from the movieid data attribute
-
-        // Make the API call with the retrieved movie ID
-        const url = 'https://streaming-availability.p.rapidapi.com/get?output_language=en&tmdb_id=movie%2F' + movieID;
-        const headers = {
-            'X-RapidAPI-Key': '33f6a33b50msh44eaaaf10ff1208p1390ecjsn752ee4c6b130',
-            'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-        };
-
-        fetch(url, { method: 'GET', headers: headers })
-            .then(response => response.json())
-            .then(response => {
-                const addedOptions = new Set(); // To store unique options
-                if (!response.result.streamingInfo.gb || response.result.streamingInfo.gb.length === 0) {
-                    console.log("no options");
-                    $('#streamingOptions').text('Sorry, no streaming options available :(');
-                } else {
-                    response.result.streamingInfo.gb.forEach(function(option, index) {
-                        const optionKey = option.service.toLowerCase(); // Consider option case-insensitive
-                        if (!addedOptions.has(optionKey)) { // Check if option is already added
-                            var title = $("<h3>").text(response.result.title);
-                            var optionElement = $("<h4>").text("Option " + (index + 1) + ": " + option.service);
-                            $('#streamingOptions').append(title, optionElement);
-                            addedOptions.add(optionKey); // Add option to the set
-                        }
-                    });
-                }
-            })
-            .catch(error => console.error('Error fetching streaming info:', error));
-    });
-});
-
-
-
 
 $(document).ready(function() {
 
@@ -265,8 +225,7 @@ $(document).ready(function() {
         .catch(err => console.error(err));
 })
 
-// Streaming availability API 
-// Streaming availability API 
+
 // Streaming availability API 
 $(document).ready(function() {
     $('.streamButton').click(function() {
