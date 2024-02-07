@@ -113,3 +113,157 @@ select, input {
 .vertical-form .submitButton:hover {
     background-color: #2980b9; /* Darker blue on hover */
 }
+/* ... (previous styles) ... */
+
+.form {
+    width: 40%;
+    background-color: #ffd966; /* Yellow color for the form */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form h2 {
+    color: #333;
+}
+
+.form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.form .submitButton {
+    background-color: #4CAF50; /* Green color for the button */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form .submitButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+ .movie {
+    width: calc(33.33% - 20px); /* Three items in a row with margin */
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block; /* Display movie items side by side */
+    margin-right: 20px;
+    box-sizing: border-box;
+}
+
+.movie img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.movie-info {
+    background-color: #f0f0f0; /* Background color for movie info */
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+}
+
+.myMoviesButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}   
+.movie {
+    width: calc(33.33% - 20px); /* Three items in a row with margin */
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block; /* Display movie items side by side */
+    margin-right: 20px;
+    box-sizing: border-box;
+}
+
+.movie img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.movie-info {
+    background-color: #f0f0f0; /* Background color for movie info */
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    display: flex; /* Display movie info as a flex container */
+    justify-content: center; /* Center movie titles horizontally */
+    align-items: center; /* Center movie info vertically */
+    flex-direction: column; /* Arrange movie info in a column */
+}
+
+.myMoviesButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+  /* Apply background colors to each movie title card */
+.movie:nth-child(odd) {
+    background-color: #ff6675; /* Red background color for odd numbered cards */
+}
+
+.movie:nth-child(even) {
+    background-color: #80d4ff; /* Blue background color for even numbered cards */
+}
+/* Override background color for Movie Title 3 */
+.movie:nth-child(3) {
+    background-color: #4CAF50; /* Green background color for Movie Title 3 */
+}
+/* Override background color for Movie Title 4 */
+.movie:nth-child(4) {
+    background-color: #754caf; /* Green background color for Movie Title 3 */
+}    
+/* Override background color for Movie Title 5 */
+.movie:nth-child(5) {
+    background-color: #af4c4c; /* Green background color for Movie Title 3 */
+} 
+      
+.movie img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.movie-info {
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.myMoviesButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+} 
+   
