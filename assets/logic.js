@@ -43,24 +43,25 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-    var criteria = {
-        sort_by: "popularity.desc",  // Sorting by popularity in descending order
-        // "release_date.gte": "1999-12-31",
-        // "release_date.lte": "2001-12-31",
-        with_genres: "18",  // Genre ID for Action (you can replace this with the desired genre)
-        // release_country: "US", // Specify the country code (e.g., "US" for United States)
-        // with_runtime_gte: 60,  // Movies with a runtime greater than or equal to 60 minutes (1 hour)
-        // with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
-        // with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
-        // with_keywords: "cowboy"
-        with_original_language: "en"
-    };
+    // var criteria = {
+    //     sort_by: "popularity.desc",  // Sorting by popularity in descending order
+    //     // "release_date.gte": "1999-12-31",
+    //     // "release_date.lte": "2001-12-31",
+    //     with_genres: "18",  // Genre ID for Action (you can replace this with the desired genre)
+    //     // release_country: "US", // Specify the country code (e.g., "US" for United States)
+    //     // with_runtime_gte: 60,  // Movies with a runtime greater than or equal to 60 minutes (1 hour)
+    //     // with_runtime_lte: 120, // Movies with a runtime less than or equal to 120 minutes (2 hours)
+    //     // with_cast: "123,456",  // Replace with actual actor IDs (you can provide multiple IDs)
+    //     // with_keywords: "cowboy"
+    //     with_original_language: "en"
+    // };
 
     $(document).ready(function() {
 
         const searchForm = $("#movieForm");
         searchForm.submit(function(event) {
             event.preventDefault();
+            clearMovies()
 
             // finding criteria based on input in form
             const originalLanguage = $(this).find("#original-language").val();
@@ -263,3 +264,9 @@ const options = {
     .then(response => response.json())
     .then(response => console.log(response))
     .catch(err => console.error(err)); } )
+
+
+
+    function clearMovies(){
+        
+    }
