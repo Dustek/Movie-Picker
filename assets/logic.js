@@ -160,36 +160,31 @@
             }
         }
 
-        // Functionality for save buttons
-        $('.saveButton').click(function() {
-            var movieElement = $(this).closest('.movie');
-            var movieTitle = movieElement.find('h3').text();
-            var genre = movieElement.find('p').text();
-            var imageUrl = movieElement.find('img').attr('src');
-
-            var movie = {
-                title: movieTitle,
-                genre: genre,
-                imageUrl: imageUrl
-            };})
-
-            // Retrieve existing saved movies from local storage
-            var savedMovies = localStorage.getItem('savedMovies');
-
-            // Check if there are already saved movies
-            if (savedMovies) {
-                // Parse the JSON data
-                var moviesArray = JSON.parse(savedMovies);
-
+        $(document).ready(function() {
+            $('.saveButton').click(function() {
+                // Retrieve movie information from the clicked button's parent element
+                var movieElement = $(this).closest('.movie');
+                var movieTitle = movieElement.find('h3').text();
+                var genre = movieElement.find('p').text();
+                var imageUrl = movieElement.find('img').attr('src');
+        
+                // Create a movie object with the retrieved information
+                var movie = {
+                    title: movieTitle,
+                    genre: genre,
+                    imageUrl: imageUrl
+                };
+        
+                // Retrieve existing saved movies from local storage
+                var savedMovies = localStorage.getItem('savedMovies');
+        
+                // Parse the JSON data or initialize an empty array if no movies are saved
+                var moviesArray = savedMovies ? JSON.parse(savedMovies) : [];
+        
                 // Add the new movie to the array
                 moviesArray.push(movie);
-
-                // Convert the updated array back to JSON and save it
+        
+                // Convert the updated array back to JSON and save it in local storage
                 localStorage.setItem('savedMovies', JSON.stringify(moviesArray));
-            } else {
-                // If no saved movies exist, create a new array with the current movie
-                localStorage.setItem('savedMovies', JSON.stringify([movie])); 
-                
-            }
-        })
-
+            });
+        });})
