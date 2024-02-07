@@ -443,6 +443,29 @@ $('.saveButton').click(function() {
         imageUrl: imageUrl
     };
 
+    // Retrieve existing saved movies from local storage
+    var savedMovies = localStorage.getItem('savedMovies');
+
+    // Check if there are already saved movies
+    if (savedMovies) {
+        // Parse the JSON data
+        var moviesArray = JSON.parse(savedMovies);
+
+        // Check if the movie is already saved
+        var isDuplicate = moviesArray.some(savedMovie => savedMovie.title === movie.title);
+
+        // If it's not a duplicate, add the new movie to the array
+        if (!isDuplicate) {
+            moviesArray.push(movie);
+            // Convert the updated array back to JSON and save it
+            localStorage.setItem('savedMovies', JSON.stringify(moviesArray));
+        }
+    } else {
+        // If no saved movies exist, create a new array with the current movie
+        localStorage.setItem('savedMovies', JSON.stringify([movie]));
+    }
+});
+
 
 
 
@@ -528,7 +551,7 @@ const options = {
   fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
     .then(response => response.json())
     .then(response => console.log(response))
-    .catch(err => console.error(err)); } )
+    .catch(err => console.error(err));
 
 
 
